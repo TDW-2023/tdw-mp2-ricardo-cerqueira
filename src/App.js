@@ -1,17 +1,20 @@
-import styled from "styled-components";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
 
 function App() {
 
-const App = styled.div`
-min-height: 100vh;
-background-color: #121212;
-`
+return(
+<div>
+  <BrowserRouter>
+  <Routes>
+  <Route path="/" element={<Home/>} />
+  </Routes>
+  </BrowserRouter>
+</div>
+)
 
-  return (
-    <App>
 
-    </App>
-  );
+
 }
 
 export default App;
