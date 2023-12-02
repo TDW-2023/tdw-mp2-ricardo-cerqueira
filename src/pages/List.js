@@ -1,66 +1,100 @@
 import styled from "styled-components";
-import ship from "../assets/ships/A-wing.png"
-import { Link } from "react-router-dom";
-import "../App.css"
+import ListShips from "../components/ListShips";
+import "../App.css";
 import Top from "../components/Top";
+import { useState, useEffect } from "react";
+import { selectData } from "../components/redux/reducers";
+import { useSelector } from "react-redux";
+import PageNumbers from "../components/PageNumbers";
 
-export default function List() {
+let ListStyles = styled.div`
+  min-height: 100vh;
+  font-family: "Major Mono Display", monospace;
+  font-size: 32px;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+`;
 
-    const ListStyles = styled.div`
-    min-height: 100vh;
-    font-family: 'Major Mono Display', monospace;
-    font-size: 32px;
-    font-weight: 400;
-    display:flex;
-    justify-content: center;
+let PageButtons = styled.button`
+  width: 300px;
+  font-family: "Major Mono Display", monospace;
+  font-size: 32px;
+  font-weight: 400;
+  background-color: none;
+  color: white;
+  background-color: #121212;
+  border: 2px solid white;
+  margin: 40px;
+  border-radius: 2px;
+  cursor: pointer !important;
+`;
+
+let Paging = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  cursor: default;
+
+  @media (max-width: 1024px) {
+    width: 70%;
     flex-direction: column;
-    `
+  }
+`;
+export default function List() {
+  const [page, setPage] = useState(1);
+  const data = useSelector(selectData);
+  const [previousButton, setPreviousButton] = useState(true);
+  const [nextButton, setNextButton] = useState(true);
 
-const Ships = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: space-around;
-flex-flow: wrap;
-margin-top: 180px;
-@media (max-width: 1240px) {
-    margin-top: 20px;
-}
-`
+  useEffect(() => {
+    setNextButton(true);
+    setPreviousButton(true);
 
-const OneShip= styled.div`
-display: flex;
-flex-direction: column;
-color: white;
-font-family: 'Montserrat';
-text-align: center;
-padding-left: 60px;
-padding-right:  60px;
-margin-bottom: 40px;
-@media (max-width: 1024px) {
-    padding: 0;
-}
-`
+    if (data.previous && !data.next) {
+      setNextButton(false);
+    }
 
-const ShipIMG= styled.img`
-width: 270px;
-margin: 20px;
-`
+    if (!data.previous && data.next) {
+      setPreviousButton(false);
+    }
+  }, [data.previous, data.next]);
 
-    return(
-        <ListStyles>
+  const nextPage = () => {
+    if (data.next) {
+      setPage(data.next.split("page=")[1]);
+    }
+  };
 
-<Top name={"project StarClaimer"} link={"/"}/>
+  const previousPage = () => {
+    if (data.previous) {
+      setPage(data.previous.split("page=")[1]);
+    }
+  };
 
-            <Ships>
-                <Link to={"/ship"}>
-<OneShip>
-<ShipIMG src={ship}></ShipIMG>
-<h6>A-Wing</h6>
-</OneShip>
-</Link>
-
-            </Ships>
-
-        </ListStyles>
-    )
+  return (
+    <ListStyles>
+      <Top name={"project StarClaimer"} link={"/"} />
+      <ListShips page={page}></ListShips>
+      <Paging>
+        <PageButtons
+          onClick={() => previousPage()}
+          style={{ opacity: previousButton ? "1" : "0.1" }}
+        >
+          « previous
+        </PageButtons>
+        <PageNumbers page={page}></PageNumbers>
+        <PageButtons
+          onClick={() => nextPage()}
+          style={{ opacity: nextButton ? "1" : "0.1" }}
+        >
+          next »
+        </PageButtons>
+      </Paging>
+    </ListStyles>
+  );
 }
