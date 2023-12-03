@@ -1,31 +1,31 @@
-name:  Pipeline CI Node.js
+name: Pipeline CI Node.js
 
 on:
-  push:                    # corre em todos os pushes
-    branches: ['**']
+  push: # corre em todos os pushes
+    branches: ["**"]
 
 jobs:
-  bob:                     
+  bob:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
       - name: Jest & ESLint
         uses: actions/setup-node@v3
-      - run: npm install             #instala dependências
-      - run: npm run test            #testa código com o Jest
-      - run: npm run lint            #ESLint
+      - run: npm install #instala dependências
+      - run: npx prettier . --write #formata ficheiros
+      - run: npm run test #testa código com o Jest
+      - run: npx prettier . --check #confirma formatação
+      - run: npm run lint #ESLint
 
-  # deploy:
-  #   runs-on: ubuntu-latest
-  #   if:  github.ref == 'refs/heads/main'
-
-  #   needs: [bob]   #só corre em caso de sucesso do bob (continue-on-error está definido false por defeito)
+  builder:
+    runs-on: ubuntu-latest
+    if:  github.ref == 'refs/heads/main'
+    needs: [bob]
     
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - name: Build e Deploy para o Netlify
-  #       uses: actions/setup-node@v3
-  #     - run: npm install     #instala dependências
-  #     - run:  npm run build  #build
-  #     - run: npx netlify-cli deploy --site ${{ secrets.NETLIFY_SITE_ID }} --auth ${{ secrets.NETLIFY_AUTH_TOKEN }} --prod  #deploy para netlify
+    steps:
+      - uses: actions/checkout@v3
+      - name: build
+        uses: actions/setup-node@v3
+      - run: npm install     #instala dependências
+      - run:  npm run build  #build

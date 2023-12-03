@@ -1,30 +1,29 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchData = createAsyncThunk(
-  'data/fetchData',
+  "data/fetchData",
   async (customParam, { rejectWithValue }) => {
     try {
       const response = await fetch(`https://swapi.dev/api/${customParam}`);
       if (!response.ok) {
-        throw new Error('Failed to fetch data');
+        throw new Error("Failed to fetch data");
       }
       const data = await response.json();
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
-  }
+  },
 );
-
 
 const initialState = {
   data: [],
   isLoading: false,
-  error: null
+  error: null,
 };
 
 const dataSlice = createSlice({
-  name: 'data',
+  name: "data",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -41,8 +40,8 @@ const dataSlice = createSlice({
       .addCase(fetchData.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
-      })
-  }
+      });
+  },
 });
 
 export const selectData = (state) => state.data.data;

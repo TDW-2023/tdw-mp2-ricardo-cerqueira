@@ -6,13 +6,12 @@ import Ship from "./pages/Ship";
 import About from "./pages/About";
 
 let AppDiv = styled.div`
-min-height: 100vh;
-background-color: #121212;
-max-width: 100vw;
+  min-height: 100vh;
+  background-color: #121212;
+  max-width: 100vw;
 `;
 
 function App() {
-
   return (
     <AppDiv>
       <BrowserRouter>
