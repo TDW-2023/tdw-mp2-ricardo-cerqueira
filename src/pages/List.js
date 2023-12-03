@@ -29,6 +29,10 @@ let PageButtons = styled.button`
   margin: 40px;
   border-radius: 2px;
   cursor: pointer !important;
+  &:active {
+    background-color: #f8f8f8;
+    color: black;
+  }
 `;
 
 let Paging = styled.div`

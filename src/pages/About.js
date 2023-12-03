@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Top from "../components/Top";
+import sitemap from "../assets/sitemap.png";
 
 let AboutDiv = styled.div`
   font-size: 32px;
@@ -13,7 +14,7 @@ let AboutTitle = styled.header`
   text-align: center;
   padding-top: 80px;
   font-weight: 600;
-  @media (min-width: 1024px) {
+  @media (min-width: 1023px) {
     padding-top: 250px;
   }
 `;
@@ -26,7 +27,30 @@ let AboutText = styled.p`
   text-align: justify;
   margin: auto;
   padding-top: 60px;
+  @media (max-width: 1024px) {
+    width: 80%;
+  }
+`;
+
+let SiteMapDiv = styled.div`
   padding-bottom: 100px;
+  font-family: "Montserrat";
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  img {
+    width: 1000px;
+    padding-left: 130px;
+    @media (max-width: 1239px) {
+      padding-left: 100px;
+      width: 800px;
+    }
+  }
+  @media (max-width: 1023px) {
+    display: none;
+  }
 `;
 
 export default function About() {
@@ -47,7 +71,12 @@ export default function About() {
             <b>cerkeira</b>
           </i>
         </a>
+        <br></br>
       </AboutText>
+      <SiteMapDiv>
+        <h4>Site Map</h4>
+        <img src={sitemap} alt="sitemap"></img>
+      </SiteMapDiv>
     </AboutDiv>
   );
 }

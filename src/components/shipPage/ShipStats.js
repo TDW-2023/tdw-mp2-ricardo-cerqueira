@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 let Stat = styled.p`
   display: flex;
   flex-direction: column;
-  text-align: justify;
+  text-align: left;
 `;
 
 let ShipStatsDiv = styled.ul`
@@ -49,13 +49,13 @@ export default function ShipStats() {
       <li>
         <img src={speed} alt="speed"></img>
         <Stat>
-          Max Speed <b>{data.max_atmosphering_speed}</b>
+          Max Speed <b>{data.max_atmosphering_speed} kph</b>
         </Stat>
       </li>
       <li>
         <img src={cargo} alt="cargo"></img>
         <Stat>
-          Cargo Capacity <b>{data.cargo_capacity}</b>
+          Cargo Capacity <b>{data.cargo_capacity} kg</b>
         </Stat>
       </li>
       <li>

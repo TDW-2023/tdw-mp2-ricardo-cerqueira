@@ -20,12 +20,12 @@ jobs:
 
   builder:
     runs-on: ubuntu-latest
-    if:  github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main'
     needs: [bob]
-    
+
     steps:
       - uses: actions/checkout@v3
       - name: build
         uses: actions/setup-node@v3
-      - run: npm install     #instala dependências
-      - run:  npm run build  #build
+      - run: npm install #instala dependências
+      - run: npm run build #build
