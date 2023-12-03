@@ -2,51 +2,51 @@ import styled from "styled-components";
 import Top from "../components/Top";
 
 let AboutDiv = styled.div`
-font-size: 32px;
-font-weight: 400;
-font-family: "Major Mono Display";
-color: white;
+  font-size: 32px;
+  font-weight: 400;
+  font-family: "Major Mono Display";
+  color: white;
 `;
 
 let AboutTitle = styled.header`
-font-family: "Montserrat";
-text-align: center;
-padding-top: 80px;
-font-weight: 600;
-@media (min-width: 1024px) {
-  padding-top: 250px;
-}
+  font-family: "Montserrat";
+  text-align: center;
+  padding-top: 80px;
+  font-weight: 600;
+  @media (min-width: 1024px) {
+    padding-top: 250px;
+  }
 `;
 
 let AboutText = styled.p`
-font-weight: 400;
-font-family: "Montserrat";
-font-size: 20px;
-width: 80%;
-text-align: justify;
-margin: auto;
-padding-top: 60px;
-padding-bottom: 100px;
+  font-weight: 400;
+  font-family: "Montserrat";
+  font-size: 20px;
+  width: 40%;
+  text-align: justify;
+  margin: auto;
+  padding-top: 60px;
+  padding-bottom: 100px;
 `;
 
 export default function About() {
-
-
   return (
     <AboutDiv>
       <Top name={"project StarClaimer"} link={"/"} />
 
       <AboutTitle> About Project StarClaimer</AboutTitle>
       <AboutText>
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s, when an unknown printer took a galley of type and
-        scrambled it to make a type specimen book. It has survived not only five
-        centuries, but also the leap into electronic typesetting, remaining
-        essentially unchanged. It was popularised in the 1960s with the release
-        of Letraset sheets containing Lorem Ipsum passages, and more recently
-        with desktop publishing software like Aldus PageMaker including versions
-        of Lorem Ipsum.
+        This is a small project that aims to create a simple environment for
+        Star Wars fans to compare and find out more about the starships featured
+        in the entire Star Wars universe.
+        <br></br>
+        <br></br>
+        Made by:{" "}
+        <a href="https://github.com/cerkeira">
+          <i>
+            <b>cerkeira</b>
+          </i>
+        </a>
       </AboutText>
     </AboutDiv>
   );

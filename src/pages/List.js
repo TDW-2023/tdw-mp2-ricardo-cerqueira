@@ -1,11 +1,10 @@
 import styled from "styled-components";
-import ListShips from "../components/ListShips";
+import ListShips from "../components/listPage/ListShips";
 import "../App.css";
 import Top from "../components/Top";
 import { useState, useEffect } from "react";
 import { selectData } from "../components/redux/reducers";
 import { useSelector } from "react-redux";
-import PageNumbers from "../components/PageNumbers";
 
 let ListStyles = styled.div`
   min-height: 100vh;
@@ -55,11 +54,11 @@ export default function List() {
     setNextButton(true);
     setPreviousButton(true);
 
-    if (data.previous && !data.next) {
+    if (!data.next) {
       setNextButton(false);
     }
 
-    if (!data.previous && data.next) {
+    if (!data.previous) {
       setPreviousButton(false);
     }
   }, [data.previous, data.next]);
@@ -87,7 +86,6 @@ export default function List() {
         >
           « previous
         </PageButtons>
-        <PageNumbers page={page}></PageNumbers>
         <PageButtons
           onClick={() => nextPage()}
           style={{ opacity: nextButton ? "1" : "0.1" }}
